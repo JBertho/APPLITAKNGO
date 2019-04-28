@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Takngo</string>
+    <string name="home_message">Connexion</string>
+    <string name="validate">S\'identifier</string>
+    <string name="hint_email">Pseudo</string>
+    <string name="hint_password">Mot de passe</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
+    <string name="first_connection">Premère connexion ?</string>
+    <string name="register">Inscription</string>
+    <string name="btn_no">Non</string>
+    <string name="btn_yes">Oui</string>
+    <string name="fields">Champ vide !</string>
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Takngo</string>
+    <string name="home_message">Connection</string>
+    <string name="validate">Log in</string>
+    <string name="hint_email">Pseudo</string>
+    <string name="hint_password">Password</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="first_connection">First connection ?</string>
+    <string name="register">Register</string>
+    <string name="btn_no">No</string>
+    <string name="btn_yes">Yes</string>
+    <string name="fields">Empty field !</string>
+</resources>
+
