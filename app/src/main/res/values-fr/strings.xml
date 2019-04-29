@@ -11,4 +11,5 @@
     <string name="btn_no">Non</string>
     <string name="btn_yes">Oui</string>
     <string name="fields">Champ vide !</string>
+    <string name="wrong_ident">Mauvais identifiants !</string>
 </resources>

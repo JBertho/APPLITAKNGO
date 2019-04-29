@@ -1,7 +1,9 @@
 package fr.takngo.application;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -10,7 +12,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,25 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         this.textView = (TextView)findViewById(R.id.response);
 
+        MyRequest request = MyRequest.getInstance(this.getApplicationContext());
+
         // Instantiate the RequestQueue.
-        final RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-        String url ="https://takngo.fr:8080";
+        final RequestQueue queue = request.getRequestQueue();
+
 
         // Request a string response from the provided URL.
-        final StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        String res = "Response is: "+ response.substring(0,15);
-                        textView.setText(res);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                textView.setText("That didn't work!");
-            }
-        });
 
 
 
@@ -60,14 +52,37 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Add the request to the RequestQueue.
-                queue.add(stringRequest);
                 if (pseudo.getText().toString().length() < 1 || password.getText().toString().length() < 1){
                     if (pseudo.getText().toString().length() < 1) {
                         pseudo.setError(getResources().getString(R.string.fields));
                     } else {
                         password.setError(getResources().getString(R.string.fields));
                     }
+                } else {
+
+                    String url ="https://takngo.fr:8080/api/user/CheckConnexion.php?email="+pseudo.getText().toString()+"&password="+HashMethods.encryptThisString(password.getText().toString());
+                    // Add the request to the RequestQueue.
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    Intent intent = new Intent(MainActivity.this, ProfilActivity.class);
+                                    try {
+                                        JSONObject user = new JSONObject(response);
+                                        Log.d("user", user.getString("email"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    startActivity(intent);
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(MainActivity.this, getResources().getString(R.string.wrong_ident),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    queue.add(stringRequest);
                 }
             }
         });
