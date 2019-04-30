@@ -11,5 +11,7 @@
     <string name="btn_yes">Yes</string>
     <string name="fields">Empty field !</string>
     <string name="wrong_ident">Wrong email or password</string>
+    <string name="user_prob">Account problem : call admin</string>
+    <string name="wrong_account">You don\'t have permission</string>
 </resources>
 

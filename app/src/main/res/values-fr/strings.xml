@@ -12,4 +12,6 @@
     <string name="btn_yes">Oui</string>
     <string name="fields">Champ vide !</string>
     <string name="wrong_ident">Mauvais identifiants !</string>
+    <string name="user_prob">Problème de compte : contacter un admin</string>
+    <string name="wrong_account">Vous n\'avez pas la permission d\'être la </string>
 </resources>

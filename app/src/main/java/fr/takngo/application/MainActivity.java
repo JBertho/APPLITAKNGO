@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -66,15 +67,17 @@ public class MainActivity extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Intent intent = new Intent(MainActivity.this, ProfilActivity.class);
+                                    JSONObject user = null;
                                     try {
-                                        JSONObject user = new JSONObject(response);
-                                        Log.d("user", user.getString("email"));
+                                         user = new JSONObject(response);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-
-                                    startActivity(intent);
+                                    try {
+                                        checkRoles(user.getInt("id"));
+                                    } catch (JSONException e) {
+                                        Toast.makeText(MainActivity.this, getResources().getString(R.string.user_prob),Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }, new Response.ErrorListener() {
                         @Override
@@ -93,5 +96,44 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private void checkRoles(int id){
+        MyRequest request = MyRequest.getInstance(this.getApplicationContext());
+        // Instantiate the RequestQueue.
+        final RequestQueue queue = request.getRequestQueue();
+        String url ="https://takngo.fr:8080/api/user/userRole.php?id="+id;
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                int isOk = 0;
+                Intent intent = new Intent(MainActivity.this, MyRoadActivity.class);
+                try {
+                    JSONArray array = new JSONArray(response);
+                    for (int i = 0; i < array.length() ;i++ ){
+                        Log.d("coucou",array.get(i).toString());
+                        if (array.get(i).toString().equals("ROLE_SERVICE") || array.get(i).toString().equals("ROLE_DRIVER")){
+                            Log.d("coucou","suis la");
+                            isOk = 1;
+                            break;
+                        }
+                    }
+                    if (isOk == 1 ){
+                        Log.d("coucou","suis la aussi");
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(MainActivity.this, getResources().getString(R.string.wrong_account),Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.wrong_account),Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(stringRequest);
     }
 }
