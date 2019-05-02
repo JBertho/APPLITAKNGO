@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MENU DE GESTION"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/b_menu_service"
+        android:text="Service"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="45dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/b_menu_road"
+        android:text="Course"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="45dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/b_menu_profil"
+        android:text="Profil"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="45dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

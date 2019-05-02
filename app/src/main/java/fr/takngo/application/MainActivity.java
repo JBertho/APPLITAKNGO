@@ -107,19 +107,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 int isOk = 0;
-                Intent intent = new Intent(MainActivity.this, MyRoadActivity.class);
+                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                 try {
                     JSONArray array = new JSONArray(response);
+                    Log.d("coucou",array.toString());
                     for (int i = 0; i < array.length() ;i++ ){
                         Log.d("coucou",array.get(i).toString());
                         if (array.get(i).toString().equals("ROLE_SERVICE") || array.get(i).toString().equals("ROLE_DRIVER")){
                             Log.d("coucou","suis la");
-                            isOk = 1;
-                            break;
+                            if (array.get(i).toString().equals("ROLE_SERVICE")){
+                                isOk = isOk + 1;
+                            }else if (array.get(i).toString().equals("ROLE_DRIVER")){
+                                isOk = isOk + 2;
+                            }
                         }
                     }
-                    if (isOk == 1 ){
-                        Log.d("coucou","suis la aussi");
+                    Log.d("coucou",isOk+"");
+                    if (isOk >= 1 ){
+                        intent.putExtra("role",isOk);
                         startActivity(intent);
                     }else{
                         Toast.makeText(MainActivity.this, getResources().getString(R.string.wrong_account),Toast.LENGTH_SHORT).show();
