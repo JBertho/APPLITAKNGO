@@ -1,9 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfilActivity">
+    tools:context=".ProfilActivity"
+    android:background="#212121">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/response"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/profile_title"
+            android:textSize="30sp"
+            android:background="@color/main_background"
+            android:textColor="@color/h1_text"
+            android:layout_marginBottom="50dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/profilepicture"
+            app:civ_border_width="2dp"
+            android:layout_gravity="center"
+            app:civ_border_color="@color/main_background"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_text"
+            android:textSize="15sp"
+            android:text="@string/name"
+            android:background="@drawable/border_bottom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_name"
+            android:textColor="@color/basic_text"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_text"
+            android:textSize="15sp"
+            android:text="@string/lname"
+            android:background="@drawable/border_bottom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_lname"
+            android:textColor="@color/basic_text"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_text"
+            android:textSize="15sp"
+            android:text="@string/email"
+            android:background="@drawable/border_bottom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_email"
+            android:textColor="@color/basic_text"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_text"
+            android:textSize="15sp"
+            android:text="@string/birthday"
+            android:background="@drawable/border_bottom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_birthday"
+            android:textColor="@color/basic_text"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_text"
+            android:textSize="15sp"
+            android:text="@string/address"
+            android:background="@drawable/border_bottom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_address"
+            android:textColor="@color/basic_text"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_text"
+            android:textSize="15sp"
+            android:text="@string/pcode"
+            android:background="@drawable/border_bottom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_postalCode"
+            android:textColor="@color/basic_text"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_text"
+            android:textSize="15sp"
+            android:text="@string/phone"
+            android:background="@drawable/border_bottom"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_phone"
+            android:textColor="@color/basic_text"
+            android:textSize="20sp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"/>
+    </LinearLayout>
+
+
+
+</ScrollView>

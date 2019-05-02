@@ -1,6 +1,7 @@
 package fr.takngo.application;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +13,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import fr.takngo.application.entity.User;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,13 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
         this.textView = (TextView)findViewById(R.id.response);
 
+
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());
+
+        //get SharedPreferences
+        final SharedPreferences settings = getSharedPreferences("user",MODE_PRIVATE);
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = request.getRequestQueue();
 
-
-        // Request a string response from the provided URL.
 
 
 
@@ -67,9 +73,15 @@ public class MainActivity extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    JSONObject user = null;
+                                    SharedPreferences.Editor editor = settings.edit();
                                     try {
-                                         user = new JSONObject(response);
+                                        JSONObject data = new JSONObject(response);
+                                        User user = User.UserFromJson(data);
+                                        Gson gson = new Gson();
+                                        String json = gson.toJson(user);
+                                        editor.putString("user",json);
+                                        //Log.d("user", user.getString("email"));
+                                        editor.apply();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
