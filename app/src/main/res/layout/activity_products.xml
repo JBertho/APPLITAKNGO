@@ -4,19 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Road.RoadMenuActivity"
-    android:background="#212121"
+    tools:context=".Product.ProductsActivity"
     android:orientation="vertical">
-    
-    <Button
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Free Road"
-        android:id="@+id/b_roadMenu_free"/>
-    <Button
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="22dp"
+        android:id="@+id/tv_products_service_title"/>
+
+    <ListView
+        android:id="@+id/lv_products"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My road"
-        android:id="@+id/b_roadMenu_mine"/>
+        android:layout_height="wrap_content">
+
+    </ListView>
+
 
 </LinearLayout>

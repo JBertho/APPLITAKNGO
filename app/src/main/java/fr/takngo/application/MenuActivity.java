@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import fr.takngo.application.Road.RoadMenuActivity;
+import fr.takngo.application.Service.MyServicesActivity;
+
 public class MenuActivity extends AppCompatActivity {
 
     Button service,course,profil;
@@ -20,9 +23,9 @@ public class MenuActivity extends AppCompatActivity {
         profil = findViewById(R.id.b_menu_profil);
 
         int role = getIntent().getIntExtra("role",3);
-        setButton(role,course,2,RoadMenuActivity.class);
+        setButton(role,course,2, RoadMenuActivity.class);
         setButton(role,profil,0,ProfilActivity.class);
-        setButton(role,service,1,RoadMenuActivity.class);
+        setButton(role,service,1, MyServicesActivity.class);
 
     }
 

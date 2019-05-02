@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RoadActivity"
+    tools:context=".Road.RoadActivity"
     android:layout_marginHorizontal="25dp"
     android:orientation="vertical">
 
@@ -61,6 +61,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tv_viewRoad_userName"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Téléphone :"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_viewRoad_phone"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,9 +1,8 @@
-package fr.takngo.application;
+package fr.takngo.application.Road;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -21,6 +20,8 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.takngo.application.MyRequest;
+import fr.takngo.application.R;
 import fr.takngo.application.adapter.RoadAdapter;
 import fr.takngo.application.entity.Road;
 

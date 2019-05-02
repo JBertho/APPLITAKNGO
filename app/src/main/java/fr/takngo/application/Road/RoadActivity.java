@@ -1,4 +1,4 @@
-package fr.takngo.application;
+package fr.takngo.application.Road;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,13 +17,14 @@ import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
+import fr.takngo.application.MyRequest;
+import fr.takngo.application.R;
 import fr.takngo.application.entity.Road;
 
 public class RoadActivity extends AppCompatActivity {
 
-    TextView start,end,appointment,distance,user;
+    TextView start,end,appointment,distance,user,phone ;
     Button submit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class RoadActivity extends AppCompatActivity {
         end.setText(road.getEnd_start());
         appointment.setText(road.getAppointment());
         distance.setText(road.getDistance()+"");
+        setClientInfo(road);
 
         if (getIntent().getStringExtra("type").equals("free")) {
             submit.setOnClickListener(new View.OnClickListener() {
@@ -75,11 +77,37 @@ public class RoadActivity extends AppCompatActivity {
             submit.setVisibility(View.GONE);
 
         }
+    }
 
+    public void setClientInfo(Road road){
+        user = (TextView)findViewById(R.id.tv_viewRoad_userName);
+        phone = (TextView)findViewById(R.id.tv_viewRoad_phone);
 
+        MyRequest request = MyRequest.getInstance(RoadActivity.this);
+        final RequestQueue queue = request.getRequestQueue();
+        String url = "https://takngo.fr:8080/api/road/getClientName.php?id=" + road.getId();
 
-
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject array = new JSONObject(response);
+                            user.setText(array.getString("lastname")+" "+array.getString("name"));
+                            phone.setText(array.getString("phone"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(RoadActivity.this, getResources().getString(R.string.wrong_ident), Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(stringRequest);
 
 
     }
+
 }

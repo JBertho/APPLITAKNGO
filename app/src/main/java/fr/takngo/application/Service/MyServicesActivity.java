@@ -1,4 +1,4 @@
-package fr.takngo.application;
+package fr.takngo.application.Service;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -21,40 +21,37 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.takngo.application.adapter.RoadAdapter;
-import fr.takngo.application.entity.Road;
+import fr.takngo.application.MyRequest;
+import fr.takngo.application.Product.ProductsActivity;
+import fr.takngo.application.R;
+import fr.takngo.application.adapter.ServiceAdapter;
+import fr.takngo.application.entity.Service;
 
-public class MyRoadActivity extends AppCompatActivity {
+public class MyServicesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_road);
-
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
+        setContentView(R.layout.activity_my_services);
         load();
     }
+
 
     private void load(){
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());
         final RequestQueue queue = request.getRequestQueue();
-        String url ="https://takngo.fr:8080/api/road/roadOfDriver.php?id=24";
-
+        String url ="https://takngo.fr:8080/api/Service/listByChief.php?id=24";
+        Log.d("coucou","yolo");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        List<Road> result= new ArrayList<>();
+                        List<Service> result= new ArrayList<>();
                         try {
                             JSONArray array = new JSONArray(response);
                             for (int i = 0; i < array.length() ;i++ ){
                                 try {
-                                    result.add(Road.RoadFromJson(array.getJSONObject(i)));
+                                    result.add(Service.ServiceFromArray(array.getJSONObject(i)));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -63,32 +60,35 @@ public class MyRoadActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Log.d("road",result.size()+"");
+                        Log.d("coucou",result.size()+"");
                         setContent(result);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MyRoadActivity.this, "Aucune course disponible",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyServicesActivity.this, "Aucun Service connue",Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(stringRequest);
     }
-    private void setContent(List<Road> roads){
-        ListView lv_roads = (ListView)findViewById(R.id.lv_road);
-        final RoadAdapter adapter = new RoadAdapter(MyRoadActivity.this,roads);
-        lv_roads.setAdapter(adapter);
 
-        lv_roads.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void setContent(List<Service> services){
+        ListView lv_services = (ListView)findViewById(R.id.lv_services);
+        final ServiceAdapter adapter = new ServiceAdapter(MyServicesActivity.this,services);
+        lv_services.setAdapter(adapter);
+
+        lv_services.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MyRoadActivity.this,RoadActivity.class);
-                Road current = (Road) adapter.getItem(i);
-                intent.putExtra("road",current);
-                intent.putExtra("type","view");
+                Intent intent = new Intent(MyServicesActivity.this, ProductsActivity.class);
+                Service current = (Service) adapter.getItem(i);
+                intent.putExtra("service",current);
                 startActivity(intent);
             }
         });
     }
+
+
+
 
 }

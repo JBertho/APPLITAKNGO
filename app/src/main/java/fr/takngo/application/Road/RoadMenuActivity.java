@@ -1,10 +1,12 @@
-package fr.takngo.application;
+package fr.takngo.application.Road;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import fr.takngo.application.R;
 
 public class RoadMenuActivity extends AppCompatActivity {
 
@@ -21,7 +23,7 @@ public class RoadMenuActivity extends AppCompatActivity {
         free.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(RoadMenuActivity.this,FreeRoadActivity.class);
+                Intent i = new Intent(RoadMenuActivity.this, FreeRoadActivity.class);
                 startActivity(i);
             }
         });
@@ -29,7 +31,7 @@ public class RoadMenuActivity extends AppCompatActivity {
         mine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(RoadMenuActivity.this,MyRoadActivity.class);
+                Intent i = new Intent(RoadMenuActivity.this, MyRoadActivity.class);
                 startActivity(i);
             }
         });

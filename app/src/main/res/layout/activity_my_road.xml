@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyRoadActivity"
+    tools:context=".Road.MyRoadActivity"
+    android:background="#212121"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="#3343f4"
         android:text="Listes des courses disponibles"
         android:textSize="25dp"
         android:textStyle="bold"/>

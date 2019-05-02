@@ -11,11 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RoadMenuActivity"></activity>
+        <activity android:name=".Product.ProductActivity"></activity>
+        <activity android:name=".Product.ProductsActivity" />
+        <activity android:name=".Service.MyServicesActivity" />
+        <activity android:name=".Road.RoadMenuActivity" />
         <activity android:name=".MenuActivity" />
-        <activity android:name=".MyRoadActivity" />
-        <activity android:name=".RoadActivity" />
-        <activity android:name=".FreeRoadActivity" />
+        <activity android:name=".Road.MyRoadActivity" />
+        <activity android:name=".Road.RoadActivity" />
+        <activity android:name=".Road.FreeRoadActivity" />
         <activity android:name=".ProfilActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

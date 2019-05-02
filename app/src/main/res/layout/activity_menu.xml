@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MenuActivity"
+    android:background="#212121"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#3343f4"
         android:text="MENU DE GESTION"
         android:textStyle="bold"
         android:textSize="22dp"
