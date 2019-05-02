@@ -11,5 +11,13 @@
     <string name="btn_yes">Yes</string>
     <string name="fields">Empty field !</string>
     <string name="wrong_ident">Wrong email or password</string>
+    <string name="profile_title">My profile</string>
+    <string name="name">Name</string>
+    <string name="lname">Last name</string>
+    <string name="email">Email</string>
+    <string name="birthday">Birthday</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="pcode">Postal code</string>
 </resources>
 

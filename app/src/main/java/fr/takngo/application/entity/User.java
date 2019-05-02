@@ -18,10 +18,51 @@ public class User {
         private String phone;
 
 
+    public int getId() {
+        return id;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public String getLastname() {
+        return lastname;
+    }
 
-        public static User UserFromArray(JSONObject data) throws JSONException {
+    public String getName() {
+        return name;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getProfile_pict() {
+        return profile_pict;
+    }
+
+    public int getCompany() {
+        return company;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPostal_code() {
+        return postal_code;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public static User UserFromJson(JSONObject data) throws JSONException {
 
             User u = new User(-1,
                     data.getString("email"),
@@ -70,6 +111,7 @@ public class User {
         private void setId(int id){
             this.id = id;
         }
+
 
 }
 

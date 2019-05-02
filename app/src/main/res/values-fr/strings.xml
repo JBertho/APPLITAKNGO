@@ -12,4 +12,13 @@
     <string name="btn_yes">Oui</string>
     <string name="fields">Champ vide !</string>
     <string name="wrong_ident">Mauvais identifiants !</string>
+    <string name="profile_title">Mon profil</string>
+    <string name="name">Prénom</string>
+    <string name="lname">Nom</string>
+    <string name="email">Adresse mail</string>
+    <string name="birthday">Date de naissance</string>
+    <string name="phone">Téléphone</string>
+    <string name="address">Adresse</string>
+    <string name="pcode">Code postal</string>
+
 </resources>

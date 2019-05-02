@@ -6,4 +6,6 @@
     <color name="main_background">#3F3E3E</color>
     <color name="h1_text">#fff</color>
     <color name="link">#03A9F4</color>
+    <color name="basic_text">#fff</color>
+    <color name="hint_text">#767575</color>
 </resources>
