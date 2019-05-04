@@ -6,6 +6,8 @@ import android.os.Parcelable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 public class Product implements Parcelable {
 
     private int id;
@@ -76,6 +78,30 @@ public class Product implements Parcelable {
         return duration_activity;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setService(int service) {
+        this.service = service;
+    }
+
+    public void setPict(String pict) {
+        this.pict = pict;
+    }
+
+    public void setDuration_activity(String duration_activity) {
+        this.duration_activity = duration_activity;
+    }
+
     public static Product ProductFromJSON(JSONObject datas) throws JSONException {
 
         String duration = "null";
@@ -96,6 +122,7 @@ public class Product implements Parcelable {
         return product;
 
     }
+
 
     @Override
     public int describeContents() {

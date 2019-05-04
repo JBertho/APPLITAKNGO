@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.takngo.application">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Product.ProductActivity"></activity>
+        <activity android:name=".Product.CreateProduct"></activity>
+        <activity android:name=".Product.EditProductActivity" />
+        <activity android:name=".Product.ProductActivity" />
         <activity android:name=".Product.ProductsActivity" />
         <activity android:name=".Service.MyServicesActivity" />
         <activity android:name=".Road.RoadMenuActivity" />

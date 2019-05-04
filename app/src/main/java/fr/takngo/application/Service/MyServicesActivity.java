@@ -33,9 +33,13 @@ public class MyServicesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_services);
-        load();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        load();
+    }
 
     private void load(){
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());

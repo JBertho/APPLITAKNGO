@@ -1,11 +1,13 @@
 package fr.takngo.application.Product;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,16 +33,21 @@ import fr.takngo.application.entity.Service;
 
 public class ProductsActivity extends AppCompatActivity {
 
+    ListView lv_products;
+    FloatingActionButton add;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
+        add = findViewById(R.id.b_products_add);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("resume","je apss la");
         load();
     }
 
@@ -48,8 +55,18 @@ public class ProductsActivity extends AppCompatActivity {
 
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());
         final RequestQueue queue = request.getRequestQueue();
-        Service service = getIntent().getParcelableExtra("service");
+        final Service service = getIntent().getParcelableExtra("service");
         String url ="https://takngo.fr:8080/api/product/listByService.php?id=" + service.getId() ;
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductsActivity.this,CreateProduct.class);
+                intent.putExtra("service",service);
+                startActivity(intent);
+            }
+        });
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -68,6 +85,7 @@ public class ProductsActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+
                         }
                         Log.d("road",result.size()+"");
                         setContent(result);
@@ -75,13 +93,16 @@ public class ProductsActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (lv_products!= null){
+                    lv_products.setVisibility(View.GONE);
+                }
                 Toast.makeText(ProductsActivity.this, "Aucune Produit existant",Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(stringRequest);
     }
     private void setContent(List<Product> services){
-        ListView lv_products = (ListView)findViewById(R.id.lv_products);
+        lv_products = (ListView)findViewById(R.id.lv_products);
         TextView tv_name = (TextView)findViewById(R.id.tv_products_service_title);
         Service service = getIntent().getParcelableExtra("service");
         tv_name.setText(service.getName());

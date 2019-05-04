@@ -74,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response) {
                                     SharedPreferences.Editor editor = settings.edit();
+                                    User user = null;
                                     try {
                                         JSONObject data = new JSONObject(response);
-                                        User user = User.UserFromJson(data);
+                                        user = User.UserFromJson(data);
                                         Gson gson = new Gson();
                                         String json = gson.toJson(user);
                                         editor.putString("user",json);
@@ -85,11 +86,7 @@ public class MainActivity extends AppCompatActivity {
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    try {
-                                        checkRoles(user.getInt("id"));
-                                    } catch (JSONException e) {
-                                        Toast.makeText(MainActivity.this, getResources().getString(R.string.user_prob),Toast.LENGTH_SHORT).show();
-                                    }
+                                    checkRoles(user.getId());
                                 }
                             }, new Response.ErrorListener() {
                         @Override
