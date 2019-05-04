@@ -1,7 +1,12 @@
 package fr.takngo.application;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import fr.takngo.application.Notification.Notification;
 import fr.takngo.application.entity.User;
 
 
@@ -39,6 +45,27 @@ public class MainActivity extends AppCompatActivity {
 
         this.textView = (TextView)findViewById(R.id.response);
 
+        //Creation du channel de notification
+        Notification.createNotificationChannel(getString(R.string.channel_name),getString(R.string.channel_description),getSystemService(NotificationManager.class));
+
+        // Create an explicit intent for an Activity in your app
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "group_request")
+                .setSmallIcon(R.drawable.second)
+                .setContentTitle("My notification")
+                .setContentText("Hello World!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // Set the intent that will fire when the user taps the notification
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+// notificationId is a unique int for each notification that you must define
+        notificationManager.notify(21, builder.build());
 
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());
 
@@ -150,4 +177,5 @@ public class MainActivity extends AppCompatActivity {
         });
         queue.add(stringRequest);
     }
+
 }
