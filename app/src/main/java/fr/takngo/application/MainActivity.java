@@ -2,9 +2,11 @@ package fr.takngo.application;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -43,11 +45,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Handler timerHandler = new Handler();
+        final Intent intentActivity = new Intent(this, MainActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intentActivity, 0);
+        final Context packageContext = this;
+        Runnable timerRunnable = new Runnable(){
+
+            @Override
+            public void run() {
+                Notification.getDriverlessRoad(MainActivity.this);
+                SharedPreferences settings = getSharedPreferences("user",MODE_PRIVATE);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (settings.getBoolean("hasFreeRoad",false)){
+
+                    Notification.createDriverNotification(intentActivity,pendingIntent,MainActivity.this,packageContext);
+                    timerHandler.postDelayed(this,600000);
+                } else {
+                    Log.d("notif","pas bon du tout");
+                }
+            }
+        };
+
+        timerHandler.postDelayed(timerRunnable, 600000);
+
         this.textView = (TextView)findViewById(R.id.response);
 
         //Creation du channel de notification
         Notification.createNotificationChannel(getString(R.string.channel_name),getString(R.string.channel_description),getSystemService(NotificationManager.class));
 
+        /*
         // Create an explicit intent for an Activity in your app
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -65,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
 // notificationId is a unique int for each notification that you must define
-        notificationManager.notify(21, builder.build());
+        notificationManager.notify(21, builder.build()); */
 
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());
 
