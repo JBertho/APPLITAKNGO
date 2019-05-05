@@ -12,6 +12,17 @@
     <string name="btn_yes">Oui</string>
     <string name="fields">Champ vide !</string>
     <string name="wrong_ident">Mauvais identifiants !</string>
+    <string name="price">Prix</string>
+    <string name="search_picture">Chercher photo</string>
+    <string name="real_validate">Valider</string>
+    <string name="cancel">Annuler</string>
+    <string name="create_product">Creation de produit</string>
+    <string name="modify_product">Modification de produit</string>
+    <string name="roads_available">Listes des courses disponibles</string>
+    <string name="menu_title">Menu de gestion</string>
+    <string name="history">Mon historique</string>
+    <string name="services">Mes services</string>
+    <string name="roads_menu">Menu des courses</string>
 
     <string name="user_prob">Problème de compte : contacter un admin</string>
     <string name="wrong_account">Vous n\'avez pas la permission d\'être la </string>
@@ -30,6 +41,12 @@
 
     <string name="notification_title">Nouveau passager !</string>
     <string name="notification_content">Cliquez pour voir les routes disponibles</string>
+
+    <string name="no_course">Aucune course disponible</string>
+    <string name="reservation_msg">Réservation Enregistré</string>
+
+    <string name="no_service">Aucun service.</string>
+    <string name="remove">supprimer</string>
 
 
 </resources>

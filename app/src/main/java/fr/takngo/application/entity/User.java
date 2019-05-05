@@ -12,7 +12,7 @@ public class User {
         private String birthday;
         private String password;
         private String profile_pict;
-        private int company;
+        private String company;
         private String address;
         private String postal_code;
         private String phone;
@@ -46,7 +46,7 @@ public class User {
         return profile_pict;
     }
 
-    public int getCompany() {
+    public String getCompany() {
         return company;
     }
 
@@ -63,7 +63,6 @@ public class User {
     }
 
     public static User UserFromJson(JSONObject data) throws JSONException {
-
             User u = new User(-1,
                     data.getString("email"),
                     data.getString("lastname"),
@@ -71,7 +70,7 @@ public class User {
                     data.getString("birthday"),
                     data.getString("password"),
                     data.getString("profile_pict"),
-                    data.getInt("company_id"),
+                    data.getString("company_id"),
                     data.getString("address"),
                     data.getString("postal_code"),
                     data.getString("phone")
@@ -90,7 +89,7 @@ public class User {
                      String birthday,
                      String password,
                      String profile_pict,
-                     int company,
+                     String company,
                      String address,
                      String postal_code,
                      String phone)

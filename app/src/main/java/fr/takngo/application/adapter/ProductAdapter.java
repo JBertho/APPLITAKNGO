@@ -49,7 +49,9 @@ public class ProductAdapter extends BaseAdapter {
 
         Product current = (Product) getItem(i);
         tv_name.setText(current.getName());
+        tv_name.setTextColor(view.getResources().getColor(R.color.hint_text));
         tv_price.setText(current.getPrice() + " €");
+        tv_price.setTextColor(view.getResources().getColor(R.color.h1_text));
 
         return view;
     }

@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     private Button register;
     private TextView textView;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,39 +61,19 @@ public class MainActivity extends AppCompatActivity {
                 if (settings.getBoolean("hasFreeRoad",false)){
 
                     Notification.createDriverNotification(intentActivity,pendingIntent,MainActivity.this,packageContext);
-                    timerHandler.postDelayed(this,600000);
+                    timerHandler.postDelayed(this,60000);
                 } else {
-                    Log.d("notif","pas bon du tout");
+                    Log.d("notif","pas de route");
                 }
             }
         };
 
-        timerHandler.postDelayed(timerRunnable, 600000);
+        timerHandler.postDelayed(timerRunnable, 60000);
 
         this.textView = (TextView)findViewById(R.id.response);
 
         //Creation du channel de notification
         Notification.createNotificationChannel(getString(R.string.channel_name),getString(R.string.channel_description),getSystemService(NotificationManager.class));
-
-        /*
-        // Create an explicit intent for an Activity in your app
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "group_request")
-                .setSmallIcon(R.drawable.second)
-                .setContentTitle("My notification")
-                .setContentText("Hello World!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                // Set the intent that will fire when the user taps the notification
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-// notificationId is a unique int for each notification that you must define
-        notificationManager.notify(21, builder.build()); */
 
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());
 
@@ -104,9 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Instantiate the RequestQueue.
         final RequestQueue queue = request.getRequestQueue();
-
-
-
 
         this.pseudo =(EditText) findViewById(R.id.pseudo);
         this.password = (EditText) findViewById(R.id.password);
@@ -132,13 +107,16 @@ public class MainActivity extends AppCompatActivity {
                                 public void onResponse(String response) {
                                     SharedPreferences.Editor editor = settings.edit();
                                     User user = null;
+
                                     try {
                                         JSONObject data = new JSONObject(response);
                                         user = User.UserFromJson(data);
+                                        Log.d("user", response);
+                                        Log.d("user", user+"");
                                         Gson gson = new Gson();
                                         String json = gson.toJson(user);
                                         editor.putString("user",json);
-                                        //Log.d("user", user.getString("email"));
+
                                         editor.apply();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -164,9 +142,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void checkRoles(int id){
-        MyRequest request = MyRequest.getInstance(this.getApplicationContext());
-        // Instantiate the RequestQueue.
-        final RequestQueue queue = request.getRequestQueue();
         String url ="https://takngo.fr:8080/api/user/userRole.php?id="+id;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -176,11 +151,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                 try {
                     JSONArray array = new JSONArray(response);
-                    Log.d("coucou",array.toString());
                     for (int i = 0; i < array.length() ;i++ ){
-                        Log.d("coucou",array.get(i).toString());
                         if (array.get(i).toString().equals("ROLE_SERVICE") || array.get(i).toString().equals("ROLE_DRIVER")){
-                            Log.d("coucou","suis la");
                             if (array.get(i).toString().equals("ROLE_SERVICE")){
                                 isOk = isOk + 1;
                             }else if (array.get(i).toString().equals("ROLE_DRIVER")){
@@ -188,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    Log.d("coucou",isOk+"");
                     if (isOk >= 1 ){
                         intent.putExtra("role",isOk);
                         startActivity(intent);
@@ -205,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        queue.add(stringRequest);
+        MyRequest.getInstance(this.getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
 }

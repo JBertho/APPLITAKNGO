@@ -48,8 +48,10 @@ public class RoadAdapter extends BaseAdapter {
         TextView tv_start = view.findViewById(R.id.tv_road_star_street);
 
         Road current = (Road)getItem(i);
-        tv_id.setText(current.getId()+"");
+        tv_id.setText("Date: "+ current.getAppointment());
+        tv_id.setTextColor(view.getResources().getColor(R.color.hint_text));
         tv_start.setText(current.getStart_street());
+        tv_start.setTextColor(view.getResources().getColor(R.color.h1_text));
 
         return view;
     }

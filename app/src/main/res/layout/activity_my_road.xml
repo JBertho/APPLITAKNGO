@@ -12,10 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="#3343f4"
-        android:text="Listes des courses disponibles"
-        android:textSize="25dp"
-        android:textStyle="bold"/>
+        android:textColor="#3380F4"
+        android:text="@string/history"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/custom_font"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,7 +33,9 @@
             <ListView
                 android:id="@+id/lv_road"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:divider="@color/h1_text"
+                android:dividerHeight="1dip">
             </ListView>
 
         </LinearLayout>

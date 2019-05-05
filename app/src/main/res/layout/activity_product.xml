@@ -4,17 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Product.ProductActivity"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/tv_viewProduct_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:paddingBottom="50dp"
-        android:paddingTop="20dp"
-        android:textSize="22dp"/>
+    android:orientation="vertical"
+    android:background="@color/main_background">
+       <TextView
+            android:id="@+id/tv_viewProduct_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingBottom="50dp"
+            android:paddingTop="20dp"
+            android:textSize="30sp"
+            android:fontFamily="@font/custom_font"
+           android:textColor="#3380F4"/>
     
     <ImageView
         android:id="@+id/iv_viewProduct_pict"
@@ -24,7 +26,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Description :"/>
+        android:text="Description"
+        android:textSize="20sp"
+        android:textColor="@color/h1_text"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +36,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prix :"
-        />
+        android:text="@string/price"
+        android:textSize="20sp"
+        android:textColor="@color/h1_text"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,14 +54,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/b_viewProduct_modif"
             android:layout_weight="1"
-            android:text="MODIFIER"/>
+            android:text="@string/modify_product"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/b_viewProduct_delete"
-            android:text="Supprimer"/>
+            android:text="@string/remove"/>
 
     </LinearLayout>
 

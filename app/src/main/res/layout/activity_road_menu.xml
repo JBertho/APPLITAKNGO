@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +7,40 @@
     tools:context=".Road.RoadMenuActivity"
     android:background="#212121"
     android:orientation="vertical">
-    
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Free Road"
-        android:id="@+id/b_roadMenu_free"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My road"
-        android:id="@+id/b_roadMenu_mine"/>
 
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/roads_menu"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:fontFamily="@font/custom_font"
+        android:textColor="#3380F4"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="25dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/roads_available"
+            android:id="@+id/b_roadMenu_free"
+            android:background="@drawable/free_road_button"
+            android:textColor="@color/h1_text"
+            android:layout_marginBottom="50dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/history"
+            android:id="@+id/b_roadMenu_mine"
+            android:background="@drawable/history_button"
+            android:textColor="@color/h1_text"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -71,7 +71,7 @@ public class FreeRoadActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(FreeRoadActivity.this, "Aucune course disponible",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FreeRoadActivity.this, getResources().getString(R.string.no_course),Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(stringRequest);

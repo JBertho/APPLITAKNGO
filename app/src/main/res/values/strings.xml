@@ -11,6 +11,17 @@
     <string name="btn_yes">Yes</string>
     <string name="fields">Empty field !</string>
     <string name="wrong_ident">Wrong email or password</string>
+    <string name="price">Price</string>
+    <string name="search_picture">Search picture</string>
+    <string name="real_validate">Validate</string>
+    <string name="cancel">Cancel</string>
+    <string name="create_product">Create product</string>
+    <string name="modify_product">Modify product</string>
+    <string name="roads_available">Roads available</string>
+    <string name="menu_title">Manage menu</string>
+    <string name="history">My history</string>
+    <string name="services">My services</string>
+    <string name="roads_menu">Roads menu</string>
 
     <string name="user_prob">Account problem : call admin</string>
     <string name="wrong_account">You don\'t have permission</string>
@@ -29,5 +40,11 @@
 
     <string name="notification_title">New passenger !</string>
     <string name="notification_content">Click to see roads available</string>
+
+    <string name="no_course">No road available</string>
+    <string name="reservation_msg">Reserved</string>
+
+    <string name="no_service">No service.</string>
+    <string name="remove">remove</string>
 
 </resources>

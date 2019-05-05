@@ -79,7 +79,7 @@ public class Notification{
             public void onErrorResponse(VolleyError error) {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putBoolean("hasFreeRoad",false);
-                editor.apply();v
+                editor.apply();
             }
         });
 

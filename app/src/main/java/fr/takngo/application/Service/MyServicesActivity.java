@@ -1,6 +1,7 @@
 package fr.takngo.application.Service;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +28,7 @@ import fr.takngo.application.Product.ProductsActivity;
 import fr.takngo.application.R;
 import fr.takngo.application.adapter.ServiceAdapter;
 import fr.takngo.application.entity.Service;
+import fr.takngo.application.entity.User;
 
 public class MyServicesActivity extends AppCompatActivity {
 
@@ -42,10 +45,13 @@ public class MyServicesActivity extends AppCompatActivity {
     }
 
     private void load(){
+        SharedPreferences settings = getSharedPreferences("user",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = settings.getString("user","");
+        User user = gson.fromJson(json,User.class);
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());
         final RequestQueue queue = request.getRequestQueue();
-        String url ="https://takngo.fr:8080/api/Service/listByChief.php?id=24";
-        Log.d("coucou","yolo");
+        String url ="https://takngo.fr:8080/api/Service/listByChief.php?id="+user.getId();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -70,7 +76,7 @@ public class MyServicesActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MyServicesActivity.this, "Aucun Service connue",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyServicesActivity.this, getResources().getString(R.string.no_service),Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(stringRequest);

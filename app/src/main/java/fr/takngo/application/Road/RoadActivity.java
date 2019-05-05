@@ -1,6 +1,7 @@
 package fr.takngo.application.Road;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +23,7 @@ import org.json.JSONObject;
 import fr.takngo.application.MyRequest;
 import fr.takngo.application.R;
 import fr.takngo.application.entity.Road;
+import fr.takngo.application.entity.User;
 
 public class RoadActivity extends AppCompatActivity {
 
@@ -30,6 +33,11 @@ public class RoadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_road);
+
+        SharedPreferences settings = getSharedPreferences("user",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = settings.getString("user","");
+        final User myUser = gson.fromJson(json,User.class);
 
         final Road road =(Road)getIntent().getParcelableExtra("road");
 
@@ -52,14 +60,14 @@ public class RoadActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     MyRequest request = MyRequest.getInstance(RoadActivity.this);
                     final RequestQueue queue = request.getRequestQueue();
-                    String url = "https://takngo.fr:8080/api/road/setDriver.php?rId=" + road.getId() + "&uId=24";
+                    String url = "https://takngo.fr:8080/api/road/setDriver.php?rId=" + road.getId() + "&uId="+myUser.getId();
 
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     Intent intent = new Intent(RoadActivity.this, FreeRoadActivity.class);
-                                    Toast.makeText(RoadActivity.this, "Réservation Enregistré", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RoadActivity.this, getResources().getString(R.string.reservation_msg), Toast.LENGTH_SHORT).show();
                                     startActivity(intent);
                                 }
                             }, new Response.ErrorListener() {

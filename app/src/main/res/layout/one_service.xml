@@ -7,11 +7,16 @@
     <TextView
         android:id="@+id/tv_service_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@color/h1_text"
+        android:textSize="20sp"/>
     <TextView
         android:id="@+id/tv_service_adress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:textColor="@color/hint_text"
+        android:textSize="15sp"/>
 
 
 </LinearLayout>

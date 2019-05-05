@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Product.EditProductActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/main_background">
     <TextView
         android:id="@+id/tv_createProduct_name"
-        android:text="Creation de produit"
+        android:text="@string/create_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"
-        android:textSize="22dp"/>
+        android:textSize="30sp"
+        android:fontFamily="@font/custom_font"
+        android:textColor="@color/titles"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,39 +30,45 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nom :"/>
+                android:text="@string/name"
+                android:textColor="@color/hint_text"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/et_createProduct_name"/>
+                android:id="@+id/et_createProduct_name"
+                android:textColor="@color/hint_text"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description :"/>
+                android:text="Description"
+                android:textColor="@color/hint_text"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/et_createProduct_description"/>
+                android:id="@+id/et_createProduct_description"
+                android:textColor="@color/hint_text"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prix :"
-                />
+                android:text="@string/price"
+                android:textColor="@color/hint_text"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:id="@+id/et_createProduct_price"/>
+                android:id="@+id/et_createProduct_price"
+                android:textColor="@color/hint_text"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Image :"
-                />
+                android:text="Image"
+                android:textColor="@color/hint_text"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Chercher photo"
-                android:id="@+id/b_createProduct_pict"/>
+                android:text="@string/search_picture"
+                android:id="@+id/b_createProduct_pict"
+                />
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -77,14 +86,14 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/b_createProduct_validate"
                     android:layout_weight="1"
-                    android:text="VALIDER"/>
+                    android:text="@string/real_validate"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/b_createProduct_cancel"
-                    android:text="ANNULER"/>
+                    android:text="@string/cancel"/>
 
             </LinearLayout>
         </LinearLayout>

@@ -8,4 +8,5 @@
     <color name="link">#03A9F4</color>
     <color name="basic_text">#fff</color>
     <color name="hint_text">#767575</color>
+    <color name="titles">#4169e1</color>
 </resources>

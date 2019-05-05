@@ -1,6 +1,7 @@
 package fr.takngo.application.Road;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +27,7 @@ import fr.takngo.application.MyRequest;
 import fr.takngo.application.R;
 import fr.takngo.application.adapter.RoadAdapter;
 import fr.takngo.application.entity.Road;
+import fr.takngo.application.entity.User;
 
 public class MyRoadActivity extends AppCompatActivity {
 
@@ -43,9 +46,13 @@ public class MyRoadActivity extends AppCompatActivity {
     }
 
     private void load(){
+        SharedPreferences settings = getSharedPreferences("user", MODE_PRIVATE);
         MyRequest request = MyRequest.getInstance(this.getApplicationContext());
         final RequestQueue queue = request.getRequestQueue();
-        String url ="https://takngo.fr:8080/api/road/roadOfDriver.php?id=24";
+        Gson gson = new Gson();
+        String json = settings.getString("user","");
+        User user = gson.fromJson(json,User.class);
+        String url ="https://takngo.fr:8080/api/road/roadOfDriver.php?id="+user.getId();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -71,7 +78,7 @@ public class MyRoadActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MyRoadActivity.this, "Aucune course disponible",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyRoadActivity.this, getResources().getString(R.string.no_course),Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(stringRequest);
