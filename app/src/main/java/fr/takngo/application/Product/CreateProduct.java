@@ -129,9 +129,15 @@ public class CreateProduct extends AppCompatActivity {
                     Log.d("image",encodedImage);
 
                     images.setImageBitmap(bm);
-
+                    images.buildDrawingCache();
+                    Bitmap bmp = images.getDrawingCache();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    byte[] byteFormat = stream.toByteArray();
+                    // get the base 64 string
+                    picture = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+                    Log.d("image",picture);
                     break;
-
             }
     }
 

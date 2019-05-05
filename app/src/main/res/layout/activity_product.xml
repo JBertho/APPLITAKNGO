@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".Product.ProductActivity"
     android:orientation="vertical">
+
     <TextView
         android:id="@+id/tv_viewProduct_name"
         android:layout_width="match_parent"
@@ -14,6 +15,12 @@
         android:paddingBottom="50dp"
         android:paddingTop="20dp"
         android:textSize="22dp"/>
+    
+    <ImageView
+        android:id="@+id/iv_viewProduct_pict"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

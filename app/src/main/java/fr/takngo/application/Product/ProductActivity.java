@@ -1,11 +1,13 @@
 package fr.takngo.application.Product;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +15,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +32,7 @@ import fr.takngo.application.entity.Product;
 public class ProductActivity extends AppCompatActivity {
 
     TextView name,description,price;
+    ImageView pict;
     Button modif,delete;
 
     @Override
@@ -40,7 +45,38 @@ public class ProductActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        pict = findViewById(R.id.iv_viewProduct_pict);
+
         final Product product = (Product) getIntent().getParcelableExtra("product");
+        Gson gson = new Gson();
+        String[] extension = product.getPict().split(product.getService()+"/");
+        Log.d("images",extension[extension.length-1]);
+        String imgUrl = "https://takngo.fr/images/product/"+product.getService()+"/"+extension[extension.length-1];
+
+        ImageRequest imageRequest = new ImageRequest(
+                imgUrl,
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        pict.setImageBitmap(response);
+                    }
+                },
+                0,
+                0,
+                null,
+                Bitmap.Config.RGB_565, //Image decode configuration
+                new Response.ErrorListener() { // Error listener
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something with error response
+                        error.printStackTrace();
+                    }
+                }
+        );
+
+        MyRequest.getInstance(this.getApplicationContext()).addToRequestQueue(imageRequest);
+
+
         name = findViewById(R.id.tv_viewProduct_name);
         description = findViewById(R.id.tv_viewProduct_description);
         price = findViewById(R.id.tv_viewProduct_price);

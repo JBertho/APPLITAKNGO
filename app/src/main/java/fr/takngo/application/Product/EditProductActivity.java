@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,6 +31,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 
 import fr.takngo.application.MenuActivity;
@@ -44,6 +47,8 @@ public class EditProductActivity extends AppCompatActivity {
     Product product;
     EditText image,name,description,price;
     String picture;
+    Product savedProduct;
+    int modif = 0;
 
     private static int GALLERY_REQUEST = 1;
 
@@ -68,6 +73,8 @@ public class EditProductActivity extends AppCompatActivity {
         name.setText(product.getName());
         description.setText(product.getDescription());
         price.setText(product.getPrice()+"");
+
+        savedProduct = product;
 
 
     }
@@ -99,8 +106,12 @@ public class EditProductActivity extends AppCompatActivity {
                 product.setPrice((Float.parseFloat(price.getText().toString())));
                 if (picture != null){
                     product.setPict(picture);
+                    modif = 1;
+                }else   {
+                    picture = "none";
+                    modif = 0;
                 }
-                edit(product);
+                edit();
                 Intent intent = new Intent(EditProductActivity.this, MyServicesActivity.class);
                 startActivity(intent);
             }
@@ -130,20 +141,26 @@ public class EditProductActivity extends AppCompatActivity {
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     //Gets the String value in the column
                     String imgDecodableString = cursor.getString(columnIndex);
-                    Log.d("image",imgDecodableString);
+                    //Log.d("image",imgDecodableString);
                     cursor.close();
                     // Set the Image in ImageView after decoding the String
                     Bitmap bm = BitmapFactory.decodeFile(imgDecodableString);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                    bm.compress(Bitmap.CompressFormat.PNG, 75, baos); //bm is the bitmap object
                     byte[] b = baos.toByteArray();
-                    String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-                    picture = encodedImage;
+                    String encodedImage = Base64.encodeToString(b, Base64.NO_WRAP);
+                    Log.d("image",encodedImage);
 
                     images.setImageBitmap(bm);
-
+                    images.buildDrawingCache();
+                    Bitmap bmp = images.getDrawingCache();
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                    byte[] byteFormat = stream.toByteArray();
+                    // get the base 64 string
+                    picture = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
+                    Log.d("image",picture);
                     break;
-
             }
     }
 
@@ -152,12 +169,12 @@ public class EditProductActivity extends AppCompatActivity {
         finish();
     }
 
-    public void edit(Product product){
+    public void edit(){
         MyRequest request = MyRequest.getInstance(EditProductActivity.this);
         final RequestQueue queue = request.getRequestQueue();
-        String url ="https://takngo.fr:8080/api/product/updateProduct.php?id=+"+product.getId()+"&name="+product.getName()+"&price="+product.getPrice()+"&description="+product.getDescription()+"&pict="+product.getPict();
+        String url ="https://takngo.fr:8080/api/product/updateProduct.php";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Intent intent = new Intent(EditProductActivity.this, MenuActivity.class);
@@ -168,7 +185,20 @@ public class EditProductActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("id",savedProduct.getId()+"");
+                parameters.put("pict", picture);
+                parameters.put("name",savedProduct.getName());
+                parameters.put("description",savedProduct.getDescription());
+                parameters.put("price",savedProduct.getPrice()+"");
+                parameters.put("modif",modif+"");
+                parameters.put("service",savedProduct.getService()+"");
+                return parameters;
+            }
+        };
         queue.add(stringRequest);
     }
 }
