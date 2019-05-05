@@ -24,4 +24,10 @@
     <string name="address">Address</string>
     <string name="pcode">Postal code</string>
 
+    <string name="channel_name">Road request</string>
+    <string name="channel_description">Display user\'s request for a road</string>
+
+    <string name="notification_title">New passenger !</string>
+    <string name="notification_content">Click to see roads available</string>
+
 </resources>

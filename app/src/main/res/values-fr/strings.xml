@@ -25,5 +25,11 @@
     <string name="address">Adresse</string>
     <string name="pcode">Code postal</string>
 
+    <string name="channel_name">Requete course</string>
+    <string name="channel_description">Affiche les demandes des utilisateurs pour une course</string>
+
+    <string name="notification_title">Nouveau passager !</string>
+    <string name="notification_content">Cliquez pour voir les routes disponibles</string>
+
 
 </resources>
