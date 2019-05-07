@@ -59,7 +59,7 @@ public class Notification{
     }
 
     public static void getDriverlessRoad(final Context context){
-        final SharedPreferences settings = context.getSharedPreferences("user",Context.MODE_PRIVATE);
+        final SharedPreferences settings = context.getSharedPreferences("notif",Context.MODE_PRIVATE);
         String url ="https://takngo.fr:8080/api/road/freeRoad.php";
         StringRequest request = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {

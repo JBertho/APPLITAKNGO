@@ -66,8 +66,6 @@ public class ProductsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

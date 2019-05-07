@@ -3,6 +3,7 @@ package fr.takngo.application.Road;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,17 +29,20 @@ import fr.takngo.application.entity.Road;
 public class FreeRoadActivity extends AppCompatActivity {
 
 
-    private ListView roads;
+    private ListView lv_roads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_free_road);
 
+        lv_roads = (ListView)findViewById(R.id.lv_road);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         load();
-
-
-
     }
 
     private void load(){
@@ -62,7 +66,7 @@ public class FreeRoadActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-
+                            Log.d("cnul",result.size()+"");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -71,13 +75,16 @@ public class FreeRoadActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                if(lv_roads != null){
+                    lv_roads.setVisibility(View.GONE);
+                }
                 Toast.makeText(FreeRoadActivity.this, getResources().getString(R.string.no_course),Toast.LENGTH_SHORT).show();
             }
         });
         queue.add(stringRequest);
     }
     private void setContent(List<Road> roads){
-        ListView lv_roads = (ListView)findViewById(R.id.lv_road);
+
         final RoadAdapter adapter = new RoadAdapter(FreeRoadActivity.this,roads);
         lv_roads.setAdapter(adapter);
 

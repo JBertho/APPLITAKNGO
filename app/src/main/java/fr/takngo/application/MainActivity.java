@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Notification.getDriverlessRoad(MainActivity.this);
-                SharedPreferences settings = getSharedPreferences("user",MODE_PRIVATE);
+                SharedPreferences settings = getSharedPreferences("notif",MODE_PRIVATE);
                 try {
                     Thread.sleep(1500);
                 } catch (InterruptedException e) {

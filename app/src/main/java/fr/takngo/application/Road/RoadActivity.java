@@ -1,7 +1,10 @@
 package fr.takngo.application.Road;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -66,9 +69,20 @@ public class RoadActivity extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Intent intent = new Intent(RoadActivity.this, FreeRoadActivity.class);
-                                    Toast.makeText(RoadActivity.this, getResources().getString(R.string.reservation_msg), Toast.LENGTH_SHORT).show();
-                                    startActivity(intent);
+                                    final ProgressDialog progressDialog = new ProgressDialog(RoadActivity.this);
+                                    progressDialog.setMessage("reservation en cours");
+                                    progressDialog.setCancelable(false);
+                                    progressDialog.setInverseBackgroundForced(false);
+                                    progressDialog.show();
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressDialog.hide();
+                                            Toast.makeText(RoadActivity.this, getResources().getString(R.string.reservation_msg), Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    },2000);
                                 }
                             }, new Response.ErrorListener() {
                         @Override
@@ -118,4 +132,8 @@ public class RoadActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
