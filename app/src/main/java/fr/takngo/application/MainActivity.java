@@ -54,21 +54,21 @@ public class MainActivity extends AppCompatActivity {
                 Notification.getDriverlessRoad(MainActivity.this);
                 SharedPreferences settings = getSharedPreferences("user",MODE_PRIVATE);
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 if (settings.getBoolean("hasFreeRoad",false)){
 
                     Notification.createDriverNotification(intentActivity,pendingIntent,MainActivity.this,packageContext);
-                    timerHandler.postDelayed(this,60000);
                 } else {
-                    Log.d("notif","pas de route");
+                    Log.d("notif2","pas de route");
                 }
+                timerHandler.postDelayed(this,60000);
             }
         };
 
-        timerHandler.postDelayed(timerRunnable, 60000);
+        timerHandler.postDelayed(timerRunnable, 0);
 
         this.textView = (TextView)findViewById(R.id.response);
 
