@@ -48,5 +48,7 @@
     <string name="no_service">Aucun service.</string>
     <string name="remove">supprimer</string>
 
+    <string name="mail_content">Envoyez-nous une courte déscription de vous, accompagnée de votre CV et lettre de motivation.</string>
+
 
 </resources>

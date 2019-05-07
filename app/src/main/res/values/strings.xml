@@ -47,4 +47,6 @@
     <string name="no_service">No service.</string>
     <string name="remove">remove</string>
 
+    <string name="mail_content">Send us a short resume about you, followed with your CV plus motivation letter.</string>
+
 </resources>
